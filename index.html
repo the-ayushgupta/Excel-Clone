@@ -74,6 +74,19 @@
             <div class="sheet active-sheet" sheetIdx="0"> Sheet 1</div>
         </div>
     </div>
+    <script>
+        function getRidCidFromAddress(address) {
+                // A-Z, 1-100
+                // B
+                let AsciiValue = address.charCodeAt(0);
+                let cid = AsciiValue - 65;
+                let rid = Number(address.substring(1)) - 1;
+                return {
+                    rid: rid, cid: cid
+                }
+
+            }
+    </script>
     <script src="init.js"></script>
     <script src="menu.js"></script>
     <script src="formula.js"></script>
