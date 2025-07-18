@@ -105,3 +105,19 @@ function removeFormula(address, formula) {
         }
     }
 }
+
+function setUI(value, rid, cid) {
+
+    let tobeChangedCell = document.querySelector(`.grid .cell[rId='${rid}'][cId='${cid}']`);
+    tobeChangedCell.textContent = value;
+    db[rid][cid].value = value;
+    // change your children -> re-evaulate -> set ui
+    let childrenArr = db[rid][cid].children;
+    // B1
+    for (let i = 0; i < childrenArr.length; i++) {
+        let chriciobj = getRidCidFromAddress(childrenArr[i]);
+        let chCellObj = db[chriciobj.rid][chriciobj.cid];
+        let value = evaluateFormula(chCellObj.formula);
+        setUI(value, chriciobj.rid, chriciobj.cid)
+    }
+}
